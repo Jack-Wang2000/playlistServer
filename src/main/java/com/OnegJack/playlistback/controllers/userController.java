@@ -27,7 +27,7 @@ public class userController {
     @RequestMapping(value = "/newPlaylist")
     public String newPlaylist(@RequestBody Playlists playlists) {
         playlistsRepository.save(playlists);
-        return "创建歌单成功!";
+        return "保存歌单成功!";
     }
 
     @RequestMapping(value = "/deleteList/{listName}")
@@ -54,14 +54,14 @@ public class userController {
     }
 
     @RequestMapping(value = "/saveHistory")
-    public String saveHistory(@RequestBody @Valid History history, BindingResult bindingResult) {
-        historyRepository.save(history);
+    public String saveHistory(@RequestBody @Valid List<History> historys, BindingResult bindingResult) {
+        historyRepository.saveAll(historys);
         return "保存历史记录成功!";
     }
 
     @RequestMapping(value = "/getHistory")
-    public List<History> getHistory(@RequestParam Integer id) {
-        return historyRepository.findAllById(id);
+    public List<History> getHistory(@RequestParam Integer usrId) {
+        return historyRepository.findAllByUsrId(usrId);
     }
 
     @RequestMapping(value = "/onlineList")

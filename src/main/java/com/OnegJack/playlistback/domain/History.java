@@ -1,39 +1,48 @@
 package com.OnegJack.playlistback.domain;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
 import java.util.Date;
 
 @Entity
 @Table(name = "history")
 @Data
+@IdClass(PrimaryKey.class)
 @NoArgsConstructor
 @AllArgsConstructor
 public class History {
-    @Id@NotEmpty
+    @Id
+    @Column(name = "usr_id")
+    private Integer usrId;
+    @Id
+    @Column(name = "id")
     private Integer id;
     @Column
-    private int usr_id;
-    @Column
-    private int song_id;
-    @Column
-    private String song_name;
+    private String name;
     @Column
     private String artist;
     @Column
     private String album;
 
     @Column
-    private Date time;
+    private String time;
 
     @Column
-    private int isInList;
+    private String listName;
 
+    @Column
+    private int duration;
+
+}
+@Data
+class PrimaryKey implements Serializable {
+
+    private Integer id;
+
+    private Integer usrId;
 }
